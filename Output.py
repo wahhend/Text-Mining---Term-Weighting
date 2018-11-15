@@ -10,6 +10,9 @@ class Output:
         self.sheet2 = self.book.add_sheet("Term Weighting")
         self.sheet2.write(0, 0, "TermWeighting")
 
+        # self.sheet2 = self.book.add_sheet("Information Retrieval")
+        # self.sheet2.write(0, 0, "Information Retrieval")
+
         self.column_number = 0
         self.row_number = 2
 

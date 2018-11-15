@@ -1,4 +1,4 @@
-# Text-Mining---Term-Weighting
+# term-weighting
 
 Tugas ini menggunakan library Sastrawi untuk stemming dan xlwt untuk output ke file .xls
 

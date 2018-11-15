@@ -5,7 +5,7 @@ stemmer = StemmerFactory().create_stemmer()
 
 def tokenization(source):
     source = source.lower()
-    source = source[:-2]
+    source = source[:-1]
     source = source.replace(",", "")
     source = source.split(". ")
 
