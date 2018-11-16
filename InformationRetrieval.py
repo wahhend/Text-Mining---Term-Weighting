@@ -20,5 +20,5 @@ def distance(cosine_similarity):
     distances = 1 - cosine_similarity
     return numpy.where(distances > 1.0e-10, distances, 0)
 
-def ranked_retrieval(distances):
+def ranked_retrieval(distances):    
     return numpy.sort(distances)
