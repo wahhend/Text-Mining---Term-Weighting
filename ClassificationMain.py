@@ -24,4 +24,4 @@ documents.append(Document(rawWeight[3], 'B'))
 documents.append(Document(rawWeight[4], 'B'))
 
 # Classification
-print(mul.all_likelihood(terms, documents)
+print(mul.decision("burung terbang", terms, documents))
