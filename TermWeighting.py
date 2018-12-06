@@ -21,9 +21,9 @@ def rawTermWeighting(terms, documents):
     rawWeight = []
 
     for document in documents:
-        documentWeight = []
+        documentWeight = [] #isinya banyaknya setiap term pada setiap dokumen
         for term in terms:
-            documentWeight.append(document.count(term))
+            documentWeight.append(document.count(term)) #ngitung berapa banyak suatu term didalam setiap dokumen dan masukin ke documentWeight
 
         rawWeight.append(documentWeight)
 
@@ -36,7 +36,7 @@ def logTermWeighting(terms, documents):
     for document in documents:
         documentWeight = []
         for term in terms:
-            count = document.count(term)
+            count = document.count(term) #banyaknya suatu term pada setiap dokumen
             if count > 0:
                 documentWeight.append(1 + math.log10(count))
             else:

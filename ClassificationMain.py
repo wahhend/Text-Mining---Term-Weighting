@@ -11,9 +11,9 @@ source = source.read()
 tokenized = pre.tokenization(source)
 stemmed = pre.stemming(tokenized)
 documents = pre.filtering(stemmed)
+terms = pre.termFromDocuments(documents)
 
 # Term Weighting
-terms = pre.termFromDocuments(documents)
 rawWeight = termW.rawTermWeighting(terms, documents)
 
 documents = list()
