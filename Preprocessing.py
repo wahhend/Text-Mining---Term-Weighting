@@ -3,19 +3,30 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 
 def tokenization(source):
-    source = source.lower()
-    source = source[:-1]
-    source = source.replace(",", "")
-    source = source.split(". ")
+    # source = source.lower()
+    # source = source[:-1]
+    # source = source.replace(",", "")
+    # source = source.split(". ")
     
     documents = []
     for document in source:
-        documents.append(document.split(" "))
+        documents.append(document.lower().split(" "))
     
     return documents
 
 def advanced_filtering(documents):
-    pass
+    for i in range(len(documents)):
+        for j in range(len(documents[i])):
+            if "http" in documents[i][j] or ".com" in documents[i][j] or ".me" in documents[i][j] or "www" in documents[i][j]:
+                documents[i][j] = ""
+            
+            try:
+                if documents[i][j][0].isdigit():
+                    documents[i][j] = ""
+            except:
+                pass
+
+    return documents
 
 
 def filtering(documents):

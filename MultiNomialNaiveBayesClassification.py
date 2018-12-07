@@ -60,14 +60,17 @@ def prior(documents, selected_class):
 
 def decision(query, terms, documents):
     likelihood = all_likelihood(terms, documents)
-    query = query.split(" ")
+    # query = query.split(" ")
 
     posterior = dict()
     for class_likelihood in likelihood: #cari posterior setiap kelas
         likely = 1
 
         for word in query:
-            likely *= class_likelihood.likelihood[word]
+            try:
+                likely *= class_likelihood.likelihood[word]
+            except:
+                pass
 
         likely *= prior(documents, class_likelihood.classification)
 
