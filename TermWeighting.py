@@ -21,9 +21,9 @@ def rawTermWeighting(terms, documents):
     rawWeight = []
 
     for document in documents:
-        documentWeight = [] #isinya banyaknya setiap term pada setiap dokumen
+        documentWeight = []
         for term in terms:
-            documentWeight.append(document.count(term)) #ngitung berapa banyak suatu term didalam setiap dokumen dan masukin ke documentWeight
+            documentWeight.append(document.count(term))
 
         rawWeight.append(documentWeight)
 
@@ -36,7 +36,7 @@ def logTermWeighting(terms, documents):
     for document in documents:
         documentWeight = []
         for term in terms:
-            count = document.count(term) #banyaknya suatu term pada setiap dokumen
+            count = document.count(term)
             if count > 0:
                 documentWeight.append(1 + math.log10(count))
             else:
@@ -66,8 +66,6 @@ def inverseDocumentFrequency(dfs, documents):
 
 def tf_idf(termFrequencies, inverseDocumentFrequencies):
     tf_idf = []
-    # for documentTermFrequencies in termFrequencies:
-    #     tf_idf.append([tf*idf for tf in documentTermFrequencies for idf in inverseDocumentFrequencies])
 
     for documentTermFrequencies in termFrequencies:
         row_tf_idf = []

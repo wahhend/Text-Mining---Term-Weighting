@@ -3,8 +3,9 @@ import TermWeighting as termW
 import MultiNomialNaiveBayesClassification as mul
 from MultiNomialNaiveBayesClassification import Document
 
+# read csv file
+# each row contains text and its classification
 def read_file(filename):
-    # read csv file
     documents = []
     with open(filename) as inputfile:
         for line in inputfile:
@@ -48,15 +49,10 @@ def print_array(documents):
     for document in documents:
         print(document)
 
-# Open file
-# source = open("clustering-class.txt", "r")
-# source = source.read()
+
 documents = read_file("sms.csv")
 print(len(documents))
-# documents = documents[0:4] + documents[10:14] + documents[20:24]
-# documents = documents[0:6] + documents[10:16] + documents[20:26]
-# documents = documents[0:8] + documents[10:18] + documents[20:28]
-print(len(documents))
+
 # Preprocessing
 texts = pre.tokenization([document.frequencies for document in documents])
 texts = pre.advanced_filtering(texts)
@@ -67,12 +63,11 @@ terms = pre.termFromDocuments(texts)
 
 # Term Weighting
 rawWeight = termW.rawTermWeighting(terms, texts)
-# print_array(rawWeight)
-
+# Insert term frequencies to each document
 for i in range(len(documents)):
     documents[i].frequencies = rawWeight[i]
-# print_documents(documents)
 
+# Read test data
 test_data = read_test_data("test_data.csv")
 test_data = pre.tokenization(test_data)
 test_data = pre.advanced_filtering(test_data)
