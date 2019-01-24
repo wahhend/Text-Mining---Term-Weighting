@@ -66,8 +66,6 @@ def inverseDocumentFrequency(dfs, documents):
 
 def tf_idf(termFrequencies, inverseDocumentFrequencies):
     tf_idf = []
-    # for documentTermFrequencies in termFrequencies:
-    #     tf_idf.append([tf*idf for tf in documentTermFrequencies for idf in inverseDocumentFrequencies])
 
     for documentTermFrequencies in termFrequencies:
         row_tf_idf = []

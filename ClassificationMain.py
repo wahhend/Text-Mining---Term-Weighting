@@ -3,25 +3,80 @@ import TermWeighting as termW
 import MultiNomialNaiveBayesClassification as mul
 from MultiNomialNaiveBayesClassification import Document
 
-# Open file
-source = open("clustering-class.txt", "r")
-source = source.read()
+# read csv file
+# each row contains text and its classification
+def read_file(filename):
+    documents = []
+    with open(filename) as inputfile:
+        for line in inputfile:
+            line = line.split(",")
+            document = ""
+            for i in range(len(line) - 1):
+                document += line[i]
+            classification = line[len(line)-1]
+            documents.append(Document(document, classification))
+
+    return documents
+
+
+def read_test_data(filename):
+    # read csv file
+    documents = []
+    with open(filename) as inputfile:
+        for line in inputfile:
+            # line = line.split(",")
+            # document = ""
+            # for i in range(len(line) - 1):
+            #     document += line[i]
+            # classification = line[len(line)-1]
+            documents.append(line)
+
+    return documents
+
+
+
+def print_documents(documents):
+    for document in documents:
+        print(document.frequencies, document.classification)
+
+
+def return_processed_data(documents, data):
+    for i in range(len(documents)):
+        documents[i].frequencies = data[i]
+
+
+def print_array(documents):
+    for document in documents:
+        print(document)
+
+
+documents = read_file("sms.csv")
+print(len(documents))
 
 # Preprocessing
-tokenized = pre.tokenization(source)
-stemmed = pre.stemming(tokenized)
-documents = pre.filtering(stemmed)
+texts = pre.tokenization([document.frequencies for document in documents])
+texts = pre.advanced_filtering(texts)
+texts = pre.filtering(texts)
+texts = pre.stemming(texts)
+texts = pre.filtering(texts)
+terms = pre.termFromDocuments(texts)
 
 # Term Weighting
-terms = pre.termFromDocuments(documents)
-rawWeight = termW.rawTermWeighting(terms, documents)
+rawWeight = termW.rawTermWeighting(terms, texts)
+# Insert term frequencies to each document
+for i in range(len(documents)):
+    documents[i].frequencies = rawWeight[i]
 
-documents = list()
-documents.append(Document(rawWeight[0], 'A'))
-documents.append(Document(rawWeight[1], 'B'))
-documents.append(Document(rawWeight[2], 'A'))
-documents.append(Document(rawWeight[3], 'B'))
-documents.append(Document(rawWeight[4], 'B'))
+# Read test data
+test_data = read_test_data("test_data.csv")
+test_data = pre.tokenization(test_data)
+test_data = pre.advanced_filtering(test_data)
+test_data = pre.filtering(test_data)
+test_data = pre.stemming(test_data)
+test_data = pre.filtering(test_data)
 
 # Classification
-print(mul.decision("burung terbang", terms, documents))
+i = 1
+for test in test_data:
+    print(i, mul.decision(test, terms, documents))
+    i+=1
